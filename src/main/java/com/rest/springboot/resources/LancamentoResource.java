@@ -10,8 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +28,7 @@ import com.rest.springboot.event.RecursoCriadoEvent;
 import com.rest.springboot.exceptionhandler.ApiExceptionHandler.Erro;
 import com.rest.springboot.models.Lancamento;
 import com.rest.springboot.repositories.LancamentoRepository;
+import com.rest.springboot.repositories.filter.LancamentoFilter;
 import com.rest.springboot.services.LancamentoService;
 import com.rest.springboot.services.exceptions.PessoaInexistenteOuInativaException;
 
@@ -42,8 +46,8 @@ public class LancamentoResource {
 	private MessageSource messageSource;
 	
 	@GetMapping
-	public List<Lancamento> listarTodos() {
-		return lancamentoRepository.findAll();
+	public Page<Lancamento> pesquisar(LancamentoFilter lancamentoFilter, Pageable pageable) {
+		return lancamentoRepository.filtrar(lancamentoFilter, pageable);
 	}
 	
 	@GetMapping("/{id}")
@@ -66,6 +70,12 @@ public class LancamentoResource {
 		String mensagemDesenvolvedor = ex.getCause() != null ? ex.getCause().toString() : ex.toString();
 		List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
 		return ResponseEntity.badRequest().body(erros);
+	}
+	
+	@DeleteMapping("/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void deletar(@PathVariable Long id) {
+		lancamentoService.deletar(id);
 	}
 	
 	

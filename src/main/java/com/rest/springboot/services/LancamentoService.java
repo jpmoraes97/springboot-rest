@@ -33,6 +33,12 @@ public class LancamentoService {
 		
 	}
 	
+	public void deletar(Long id) {
+		Lancamento lancamento = lancamentoRepository.findLancamentoById(id);
+		if (lancamento == null)
+			throw new EmptyResultDataAccessException(1);
+		lancamentoRepository.delete(lancamento);
+	}
 	
 	
 	
