@@ -30,6 +30,7 @@ import com.rest.springboot.exceptionhandler.ApiExceptionHandler.Erro;
 import com.rest.springboot.models.Lancamento;
 import com.rest.springboot.repositories.LancamentoRepository;
 import com.rest.springboot.repositories.filter.LancamentoFilter;
+import com.rest.springboot.repositories.projection.LancamentoResumo;
 import com.rest.springboot.services.LancamentoService;
 import com.rest.springboot.services.exceptions.PessoaInexistenteOuInativaException;
 
@@ -50,6 +51,12 @@ public class LancamentoResource {
 	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
 	public Page<Lancamento> pesquisar(LancamentoFilter lancamentoFilter, Pageable pageable) {
 		return lancamentoRepository.filtrar(lancamentoFilter, pageable);
+	}
+	
+	@GetMapping(params = "resumo")
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
+	public Page<LancamentoResumo> resumo(LancamentoFilter lancamentoFilter, Pageable pageable){
+		return lancamentoRepository.resumir(lancamentoFilter, pageable);
 	}
 	
 	@GetMapping("/{id}")
