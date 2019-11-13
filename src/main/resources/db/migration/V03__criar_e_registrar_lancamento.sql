@@ -18,11 +18,11 @@ FOREIGN KEY(categoria_id) REFERENCES categoria(id)
 
 INSERT INTO lancamento(id, descricao, data_vencimento, data_pagamento, valor, observacao, tipo, pessoa_id, categoria_id)
 VALUES
-(1, 'descricao teste teste teste', '2019-11-10', '2019-11-11', 556, 'observacao teste teste', 'RECEITA', 1, 1),
+(1, 'descricao teste teste teste', '2019-11-13',null, 556, 'observacao teste teste', 'RECEITA', 1, 1),
 (2, 'descricao teste teste teste', '2019-11-10', '2019-11-11', 767, 'observacao teste teste', 'DESPESA', 2, 2),
 (3, 'descricao teste teste teste', '2019-11-10', '2019-11-11', 883, 'observacao teste teste', 'RECEITA', 3, 3),
 (4, 'descricao teste teste teste', '2019-11-10', '2019-11-11', 500, 'observacao teste teste', 'DESPESA', 1, 2),
-(5, 'descricao teste teste teste', '2019-11-10', '2019-11-11', 500, 'observacao teste teste', 'RECEITA', 2, 3),
+(5, 'descricao teste teste teste', '2019-11-13', null, 500, 'observacao teste teste', 'RECEITA', 2, 3),
 (6, 'descricao teste teste teste', '2019-11-10', '2019-11-11', 500, 'observacao teste teste', 'DESPESA', 3, 3),
 (7, 'descricao teste teste teste', '2019-11-10', '2019-11-11', 500, 'observacao teste teste', 'RECEITA', 1, 2),
 (8, 'descricao teste teste teste', '2019-11-10', '2019-11-11', 654, 'observacao teste teste', 'DESPESA', 2, 1),
