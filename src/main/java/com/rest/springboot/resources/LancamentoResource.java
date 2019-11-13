@@ -1,5 +1,6 @@
 package com.rest.springboot.resources;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,11 +21,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rest.springboot.dto.EstatisticaLancamentoCategoria;
+import com.rest.springboot.dto.EstatisticaLancamentoDia;
 import com.rest.springboot.event.RecursoCriadoEvent;
 import com.rest.springboot.exceptionhandler.ApiExceptionHandler.Erro;
 import com.rest.springboot.models.Lancamento;
@@ -90,6 +94,23 @@ public class LancamentoResource {
 		lancamentoService.deletar(id);
 	}
 	
+	@PutMapping("/{id}")
+	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_LANCAMENTO')")
+	public Lancamento atualizar(@PathVariable Long id, @Valid @RequestBody Lancamento lancamento) {
+		return lancamentoService.atualizar(lancamento, id);
+	}
+	
+	@GetMapping("/estatisticas/por-categoria")
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
+	public List<EstatisticaLancamentoCategoria> porCategoria() {
+		return lancamentoRepository.porCategoria(LocalDate.now());
+	}
+	
+	@GetMapping("/estatisticas/por-dia")
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
+	public List<EstatisticaLancamentoDia> porDia() {
+		return lancamentoRepository.porDia(LocalDate.now());
+	}
 	
 	
 	
