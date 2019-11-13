@@ -1,26 +1,36 @@
 package com.rest.springboot.services;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import com.rest.springboot.mail.Mailer;
 import com.rest.springboot.models.Lancamento;
 import com.rest.springboot.models.Pessoa;
+import com.rest.springboot.models.Usuario;
 import com.rest.springboot.repositories.LancamentoRepository;
 import com.rest.springboot.repositories.PessoaRepository;
+import com.rest.springboot.repositories.UsuarioRepository;
 import com.rest.springboot.services.exceptions.PessoaInexistenteOuInativaException;
 
 @Service
 public class LancamentoService {
 	
-	private static final String TIME_ZONE = "America/Sao_Paulo";
+	//private static final String TIME_ZONE = "America/Sao_Paulo";
 
 	@Autowired 
 	private LancamentoRepository lancamentoRepository;
 	@Autowired
 	private PessoaRepository pessoaRepository;
+	@Autowired
+	private UsuarioRepository usuarioRepository;
+	@Autowired
+	private Mailer mailer;
 	
 	public Lancamento buscar(Long id) {
 		Lancamento lancamento = lancamentoRepository.findLancamentoById(id);
@@ -60,13 +70,15 @@ public class LancamentoService {
 			throw new PessoaInexistenteOuInativaException();
 	}
 	
-	@Scheduled(cron = "0 12 21 * * MON-FRI", zone = TIME_ZONE)
+	@Scheduled(cron = "0 4 15 * * MON-FRI")
 	public void avisarSobreLancamentosVencidos() {
-		System.out.println("metodo sendo executado");
+		List<Lancamento> vencidos = lancamentoRepository
+					.findByDataVencimentoLessThanEqualAndDataPagamentoIsNull(LocalDate.now());
+		List<Usuario> destinatarios = usuarioRepository
+				.findByPermissoesDescricao("ROLE_PESQUISAR_LANCAMENTO");
+		
+		mailer.avisarSobreLancamentosVencidos(vencidos, destinatarios);
+		
 	}
-	
-	
-	
-	
-	
+		
 }

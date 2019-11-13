@@ -54,5 +54,5 @@ public class Lancamento implements Serializable {
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Categoria categoria;
-		
+
 }
