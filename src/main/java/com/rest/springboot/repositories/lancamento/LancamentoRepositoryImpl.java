@@ -19,6 +19,7 @@ import org.springframework.util.StringUtils;
 
 import com.rest.springboot.dto.EstatisticaLancamentoCategoria;
 import com.rest.springboot.dto.EstatisticaLancamentoDia;
+import com.rest.springboot.dto.EstatisticaLancamentoPessoa;
 import com.rest.springboot.models.Lancamento;
 import com.rest.springboot.repositories.filter.LancamentoFilter;
 import com.rest.springboot.repositories.projection.LancamentoResumo;
@@ -159,6 +160,26 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQueries {
 		criteriaQuery.groupBy(root.get("tipo"), root.get("dataVencimento"));
 		
 		TypedQuery<EstatisticaLancamentoDia> typedQuery = manager.createQuery(criteriaQuery);
+		return typedQuery.getResultList();
+	}
+
+	@Override
+	public List<EstatisticaLancamentoPessoa> porPessoa(LocalDate inicio, LocalDate fim) {
+		CriteriaBuilder builder = manager.getCriteriaBuilder();
+		CriteriaQuery<EstatisticaLancamentoPessoa> criteriaQuery = builder.createQuery(EstatisticaLancamentoPessoa.class);
+		Root<Lancamento> root = criteriaQuery.from(Lancamento.class);
+		
+		criteriaQuery.select(builder.construct(EstatisticaLancamentoPessoa.class,
+				root.get("tipo"), root.get("pessoa"), builder.sum(root.get("valor"))));
+		
+		criteriaQuery.where(
+				builder.greaterThanOrEqualTo(root.get("dataVencimento"), inicio),
+				builder.lessThanOrEqualTo(root.get("dataVencimento"), fim)
+				);
+		
+		criteriaQuery.groupBy(root.get("tipo"), root.get("pessoa"));
+		
+		TypedQuery<EstatisticaLancamentoPessoa> typedQuery = manager.createQuery(criteriaQuery);
 		return typedQuery.getResultList();
 	}
 		

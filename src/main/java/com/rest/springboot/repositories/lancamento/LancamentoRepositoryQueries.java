@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 
 import com.rest.springboot.dto.EstatisticaLancamentoCategoria;
 import com.rest.springboot.dto.EstatisticaLancamentoDia;
+import com.rest.springboot.dto.EstatisticaLancamentoPessoa;
 import com.rest.springboot.models.Lancamento;
 import com.rest.springboot.repositories.filter.LancamentoFilter;
 import com.rest.springboot.repositories.projection.LancamentoResumo;
@@ -21,5 +22,7 @@ public interface LancamentoRepositoryQueries {
 	public List<EstatisticaLancamentoCategoria> porCategoria(LocalDate mesReferencia);
 	
 	public List<EstatisticaLancamentoDia> porDia(LocalDate mesReferencia);
+	
+	public List<EstatisticaLancamentoPessoa> porPessoa(LocalDate inicio, LocalDate fim);
 
 }
