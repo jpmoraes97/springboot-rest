@@ -10,7 +10,6 @@ import com.rest.springboot.repositories.lancamento.LancamentoRepositoryQueries;
 
 public interface LancamentoRepository extends JpaRepository<Lancamento, Long> , LancamentoRepositoryQueries {
 
-	Lancamento findLancamentoById(Long id);
 	
 	public List<Lancamento> findByDataVencimentoLessThanEqualAndDataPagamentoIsNull(LocalDate data);
 	
