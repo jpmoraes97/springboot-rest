@@ -13,4 +13,6 @@ public interface LancamentoRepository extends JpaRepository<Lancamento, Long> , 
 	
 	public List<Lancamento> findByDataVencimentoLessThanEqualAndDataPagamentoIsNull(LocalDate data);
 	
+	Lancamento findLancamentoById(Long id);
+	
 }

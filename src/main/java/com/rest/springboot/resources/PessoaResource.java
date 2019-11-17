@@ -43,11 +43,11 @@ public class PessoaResource {
 		return pessoaRepository.findByNomeContaining(nome, pageable);
 	}
 	
-	//@GetMapping
-	//@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA') and #oauth2.hasScope('read')")
-	//public List<Pessoa> buscarTodas() {
-	//	return pessoaRepository.findAll();
-	//}
+//	@GetMapping(params = "list")
+//	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA') and #oauth2.hasScope('read')")
+//	public List<Pessoa> buscarTodas() {
+//		return pessoaRepository.findAll();
+//	}
 	
 	@GetMapping("/{id}")
 	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA') and #oauth2.hasScope('read')")

@@ -44,7 +44,7 @@ public class LancamentoService {
 	private Mailer mailer;
 	
 	public Lancamento buscar(Long id) {
-		Lancamento lancamento = lancamentoRepository.getOne(id);
+		Lancamento lancamento = lancamentoRepository.findLancamentoById(id);
 		if (lancamento == null)
 			throw new EmptyResultDataAccessException(1);
 		return lancamento;
@@ -57,7 +57,7 @@ public class LancamentoService {
 	}
 	
 	public Lancamento atualizar(Lancamento lancamento, Long id) {
-		Lancamento toUpdate = lancamentoRepository.getOne(id);
+		Lancamento toUpdate = lancamentoRepository.findLancamentoById(id);
 		if (!lancamento.getPessoa().equals(toUpdate.getPessoa())) 
 			validarPessoa(lancamento);	
 		
@@ -66,7 +66,7 @@ public class LancamentoService {
 		}
 			
 	public void deletar(Long id) {
-		Lancamento lancamento = lancamentoRepository.getOne(id);
+		Lancamento lancamento = lancamentoRepository.findLancamentoById(id);
 		if (lancamento == null)
 			throw new EmptyResultDataAccessException(1);
 		lancamentoRepository.delete(lancamento);
@@ -76,7 +76,7 @@ public class LancamentoService {
 	private void validarPessoa(Lancamento lancamento) {
 		Pessoa pessoa = null;
 		if (lancamento.getPessoa().getId() != null)
-			pessoa = pessoaRepository.getOne(lancamento.getPessoa().getId());
+			pessoa = pessoaRepository.findPessoaById(lancamento.getPessoa().getId());
 		if (pessoa == null || !pessoa.getAtivo())
 			throw new PessoaInexistenteOuInativaException();
 	}
