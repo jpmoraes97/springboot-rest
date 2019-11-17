@@ -18,13 +18,17 @@ FOREIGN KEY(categoria_id) REFERENCES categoria(id)
 
 INSERT INTO lancamento(id, descricao, data_vencimento, data_pagamento, valor, observacao, tipo, pessoa_id, categoria_id)
 VALUES
-(1, 'descricao teste teste teste', '2019-11-13',null, 556, 'observacao teste teste', 'RECEITA', 1, 1),
-(2, 'descricao teste teste teste', '2019-11-10', '2019-11-11', 767, 'observacao teste teste', 'DESPESA', 2, 2),
-(3, 'descricao teste teste teste', '2019-11-10', '2019-11-11', 883, 'observacao teste teste', 'RECEITA', 3, 3),
-(4, 'descricao teste teste teste', '2019-11-10', '2019-11-11', 500, 'observacao teste teste', 'DESPESA', 1, 2),
-(5, 'descricao teste teste teste', '2019-11-13', null, 500, 'observacao teste teste', 'RECEITA', 2, 3),
-(6, 'descricao teste teste teste', '2019-11-10', '2019-11-11', 500, 'observacao teste teste', 'DESPESA', 3, 3),
-(7, 'descricao teste teste teste', '2019-11-10', '2019-11-11', 500, 'observacao teste teste', 'RECEITA', 1, 2),
+(1, 'compra de um produto assim assado', '2019-11-13',null, 556, 'observacao teste teste', 'RECEITA', 1, 1),
+(2, 'venda do video game ps4', '2019-11-10', '2019-11-11', 767, 'observacao teste teste', 'DESPESA', 2, 2),
+(3, 'compra de 5 bermudas oakley', '2019-11-10', '2019-11-11', 883, 'observacao teste teste', 'RECEITA', 3, 3),
+(4, 'compra de ssd 500gb', '2019-11-10', '2019-11-11', 500, 'observacao teste teste', 'DESPESA', 1, 2),
+(5, 'pagamento da conta de luz', '2019-11-13', null, 500, 'observacao teste teste', 'RECEITA', 2, 3),
+(6, 'pagamento da conta de agua', '2019-11-10', '2019-11-11', 500, 'observacao teste teste', 'DESPESA', 3, 3),
+(7, 'compra de 12 camisetas polo lacoste', '2019-11-10', '2019-11-11', 500, 'observacao teste teste', 'RECEITA', 1, 2),
 (8, 'descricao teste teste teste', '2019-11-10', '2019-11-11', 654, 'observacao teste teste', 'DESPESA', 2, 1),
 (9, 'descricao teste teste teste', '2019-11-10', '2019-11-11', 323, 'observacao teste teste', 'DESPESA', 2, 4),
-(10, 'descricao teste teste teste', '2019-11-10', '2019-11-11', 1507, 'observacao teste teste', 'RECEITA', 3, 4);
+(10, 'descricao teste teste teste', '2019-11-10', '2019-11-11', 500, 'observacao teste teste', 'DESPESA', 3, 3),
+(11, 'descricao teste teste teste', '2019-11-10', '2019-11-11', 500, 'observacao teste teste', 'RECEITA', 1, 2),
+(12, 'descricao teste teste teste', '2019-11-10', '2019-11-11', 654, 'observacao teste teste', 'DESPESA', 2, 1),
+(13, 'descricao teste teste teste', '2019-11-10', '2019-11-11', 323, 'observacao teste teste', 'DESPESA', 2, 4),
+(14, 'descricao teste teste teste', '2019-11-10', '2019-11-11', 1507, 'observacao teste teste', 'RECEITA', 3, 4);
