@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -49,11 +51,10 @@ public class Lancamento implements Serializable {
 	@NotNull
 	@ManyToOne
 	@JoinColumn(nullable = false)
+	@JsonIgnoreProperties("contatos")
 	private Pessoa pessoa;
 	@NotNull
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Categoria categoria;
-	
-
 }

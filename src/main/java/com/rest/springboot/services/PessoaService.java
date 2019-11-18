@@ -14,6 +14,11 @@ public class PessoaService {
 	@Autowired
 	private PessoaRepository pessoaRepository;
 	
+	public Pessoa salvar(Pessoa pessoa) {
+		pessoa.getContatos().forEach(c -> c.setPessoa(pessoa));
+		return pessoaRepository.save(pessoa);
+	}
+	
 	public Pessoa buscar(Long id) {
 		Pessoa pessoa = pessoaRepository.findPessoaById(id);
 		if (pessoa == null)
@@ -26,7 +31,11 @@ public class PessoaService {
 		if (pessoaAtualizada == null)
 			throw new EmptyResultDataAccessException(1);
 		
-		BeanUtils.copyProperties(pessoa, pessoaAtualizada, "id");
+		pessoaAtualizada.getContatos().clear();
+		pessoaAtualizada.getContatos().addAll(pessoa.getContatos());
+		pessoaAtualizada.getContatos().forEach(c -> c.setPessoa(pessoaAtualizada));
+		
+		BeanUtils.copyProperties(pessoa, pessoaAtualizada, "id", "contatos");
 		return pessoaRepository.save(pessoaAtualizada);
 	}
 	
