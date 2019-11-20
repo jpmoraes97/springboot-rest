@@ -1,6 +1,6 @@
 CREATE TABLE usuario(
 
-id BIGINT(20) NOT NULL,
+id BIGINT(20) NOT NULL AUTO_INCREMENT,
 nome VARCHAR(50) NOT NULL,
 email VARCHAR(50) NOT NULL UNIQUE,
 senha VARCHAR(150) NOT NULL,
@@ -49,7 +49,7 @@ VALUES
 (2,1),(2,2),(2,3),(2,4),(2,5),(2,6),(2,7),(2,8),(2,9),
 
 -- secretaria
-(3,2),(3,4),(3,6),(3,8);
+(3,2),(3,4),(3,5),(3,8);
 
 
 

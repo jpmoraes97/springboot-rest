@@ -15,7 +15,7 @@
 			<textField isStretchWithOverflow="true">
 				<reportElement x="0" y="0" width="555" height="60" uuid="21141904-6a50-4fdd-8446-a6840d22ef2b"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial Black" size="18"/>
+					<font fontName="SansSerif" size="18"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Lançamentos por pessoa de " 
 + DATEFORMAT($P{DT_INICIO}, "dd/MM/yyyy") + " Até " + DATEFORMAT($P{DT_FIM}, "dd/MM/yyyy")]]></textFieldExpression>

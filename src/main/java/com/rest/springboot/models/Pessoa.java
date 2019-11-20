@@ -41,7 +41,7 @@ public class Pessoa implements Serializable {
 	@Size(min = 11, max = 11)
 	private String cpf;
 	
-	@NotNull
+	
 	private Boolean ativo;
 	
 	@NotNull
