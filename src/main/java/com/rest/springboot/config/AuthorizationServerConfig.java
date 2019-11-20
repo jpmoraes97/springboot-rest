@@ -28,7 +28,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		 .secret("!4NGUL4R!")
 		 .scopes("read", "write")
 		 .authorizedGrantTypes("password", "refresh_token") //password flow
-		 .accessTokenValiditySeconds(20)
+		 .accessTokenValiditySeconds(200)
 		 .refreshTokenValiditySeconds(3600*24);
 		 
 	}
